@@ -7,11 +7,11 @@ body {
     font-size: 32px;
     width: 100%;
     max-width: 1050px;
-    height: 300px;
+    height: 250px;
     display: flex;
     margin: auto;
     margin-bottom: 20px;
-    margin-top: 30px;
+    margin-top: 150px;
     resize: none;
     border-radius: 5px;
     background-color: floralwhite;
@@ -19,14 +19,19 @@ body {
 
 .keyboard {
     width: 100%;
+    height: 280px;
     padding: 5px 0;
     background: #323333;
     max-width: 1050px;
     margin: auto;
     border-radius: 5px;
+    box-shadow: inset 0 -0.4vw #323333, inset 0 -0.6vw white;
+    display: flex;
+    flex-direction: column;
 }
 
 .keyboard-keys {
+    padding-top: 10px;
     text-align: center;
 }
 
@@ -38,6 +43,7 @@ body {
     border-radius: 4px;
     border: none;
     background: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 -0.4vw black, inset 0 -0.6vw #aba9a9;
     color: #ffffff;
     font-size: 1.05rem;
     outline: none;
@@ -60,8 +66,8 @@ body {
 }
 
 .keyboard-key-extra {
-    width: 36%;
-    max-width: 500px;
+    width: 35%;
+    max-width: 550px;
 }
 
 .keyboard-key-activatable::after {

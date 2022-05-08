@@ -2,6 +2,8 @@ const textarea = document.createElement('textarea');
   textarea.classList.add('area');
   document.body.append(textarea);
 
+
+
 const Keyboard = {
     elements: {
         main: null,
@@ -16,8 +18,9 @@ const Keyboard = {
 
     properties: {
         value: "",
-        capsLock: false
+        capsLock: false,
     },
+
 
     init() {
         // Create main elements
@@ -43,16 +46,17 @@ const Keyboard = {
         });
     },
 
+
     createKeys() {
         const fragment = document.createDocumentFragment();
-        const keyLayout = [
-            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
-            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-            "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-            "done", "z", "x", "c", "v", "b", "n", "m", ",", "↑", ".", "/",
-            "Ctrl", "Alt", "space", "Alt", "←", "↓", "→"
-        ];
-
+       const  keyLayout = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+    'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',
+    'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'done',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '↑', '/', 'Ctrl', 'Alt', 'space', 'Ctrl', 'Alt', '←', '↓', '→']
+    // const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+    // 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'del',
+    // 'caps', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'done',
+    // 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',  '↑', '/', 'Ctrl', 'Alt', 'space', 'Ctrl', 'Alt', '←', '↓', '→'],
         // Creates HTML for an icon
         const createIconHTML = (iconName) => {
             return `<i class="material-icons">${iconName}</i>`;
@@ -60,7 +64,8 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "p", "enter", "/"].indexOf(key) !== -1;
+            const insertLineBreak = ["backspace", "del", "enter", "/"].indexOf(key) !== -1;
+
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -77,6 +82,7 @@ const Keyboard = {
                     });
 
                     break;
+                    
 
                 case "caps":
                     keyElement.classList.add("keyboard-key-wide", "keyboard-key-activatable");
@@ -120,6 +126,37 @@ const Keyboard = {
                         this.triggerEvent("onclose");
                     });
 
+                    break;
+
+                case 'Tab':
+                    keyElement.classList.add("keyboard-key-wide");
+                    keyElement.innerHTML = createIconHTML("keyboard_tab");
+
+                    keyElement.addEventListener('click', () => {
+                        this.properties.value += "\t";
+                        this.triggerEvent("oninput");
+                    });
+
+                    break;
+                
+                case 'Alt':
+                    keyElement.innerHTML = "alt";
+    
+                    keyElement.addEventListener('keypress', () => {
+                        this.properties.value += "";
+                        this.triggerEvent("oninput");
+                        });
+    
+                    break;
+                
+                case 'Ctrl':
+                    keyElement.innerHTML = "ctrl";
+        
+                    keyElement.addEventListener('keypress', () => {
+                        this.properties.value += "";
+                        this.triggerEvent("oninput");
+                        });
+        
                     break;
 
                 default:
@@ -174,4 +211,5 @@ const Keyboard = {
 
 window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
+    textarea.focus();
 });
