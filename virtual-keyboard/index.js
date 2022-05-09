@@ -1,6 +1,6 @@
 const textarea = document.createElement('textarea');
-  textarea.classList.add('area');
-  document.body.append(textarea);
+textarea.classList.add('area');
+document.body.append(textarea);
 
 
 
@@ -87,7 +87,7 @@ const Keyboard = {
 
             switch (key) {
                 case "backspace":
-                    keyElement.classList.add("keyboard-key-wide");
+                    keyElement.classList.add("keyboard-key-wide", "key_8");
                     keyElement.innerHTML = createIconHTML("backspace");
 
                     keyElement.addEventListener("click", () => {
@@ -99,7 +99,7 @@ const Keyboard = {
                     
 
                 case "caps":
-                    keyElement.classList.add("keyboard-key-wide", "keyboard-key-activatable");
+                    keyElement.classList.add("keyboard-key-wide", "keyboard-key-activatable", "key_20");
                     keyElement.innerHTML = createIconHTML("keyboard_capslock");
 
                     keyElement.addEventListener("click", () => {
@@ -110,7 +110,7 @@ const Keyboard = {
                     break;
 
                 case "enter":
-                    keyElement.classList.add("keyboard-key-wide");
+                    keyElement.classList.add("keyboard-key-wide", "key_13");
                     keyElement.innerHTML = createIconHTML("keyboard_return");
 
                     keyElement.addEventListener("click", () => {
@@ -160,7 +160,7 @@ const Keyboard = {
     
 
                 case "Space":
-                    keyElement.classList.add("keyboard-key-extra");
+                    keyElement.classList.add("keyboard-key-extra", "key_32");
                     keyElement.innerHTML = createIconHTML("space_bar");
 
                     keyElement.addEventListener("click", () => {
@@ -171,7 +171,7 @@ const Keyboard = {
                     break;
 
                 case "done":
-                    keyElement.classList.add("keyboard-key-wide");
+                    keyElement.classList.add("keyboard-key-wide", "key_16");
                     keyElement.innerHTML = createIconHTML("check_circle");
 
                     keyElement.addEventListener("click", () => {
@@ -182,7 +182,7 @@ const Keyboard = {
                     break;
 
                 case 'Tab':
-                    keyElement.classList.add("keyboard-key-wide");
+                    keyElement.classList.add("keyboard-key-wide", "key_9");
                     keyElement.innerHTML = createIconHTML("keyboard_tab");
 
                     keyElement.addEventListener('click', () => {
@@ -214,6 +214,12 @@ const Keyboard = {
 
                 default:
                     keyElement.textContent = key.toLowerCase();
+                    keyElement.textContent = key;
+                    if (key > 'a' && key < 'z' || key > 'A' && key < 'Z') {
+                        keyElement.classList.add(`key_${key}`);
+                    } else {
+                        keyElement.classList.add(`key_${key.charCodeAt()}`);
+                    }
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
@@ -248,6 +254,22 @@ const Keyboard = {
             }
         }
     },
+    getKey(keyCode, key) {
+        let keyElement;
+        if (key > 'a' && key < 'z' || key > 'A' && key < 'Z' ) {
+            keyElement = document.querySelector(`.key_${key.toLowerCase()}`);
+        } else {
+            keyElement = document.querySelector(`.key_${keyCode}`);
+        }
+        if (keyElement) {
+            keyElement.classList.add('active-key');
+        }
+        if (keyElement) {
+            setTimeout(function () {
+                keyElement.classList.remove('active-key');
+            }, 150)
+        }
+    },
 
     open(initialValue, oninput, onclose) {
         this.properties.value = initialValue || "";
@@ -268,3 +290,14 @@ window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
     textarea.focus();
 });
+document.querySelector('.area').addEventListener('keypress', (event) => {
+    const keyCode = event.keyCode;
+    const key = event.key;
+    Keyboard.getKey(keyCode, key);
+})
+window.onload = () => {
+    const adviсe = document.createElement('p');
+    adviсe.classList.add('advice');
+    adviсe.innerHTML = '<strong>Сменить раскладку можно</strong> нажатием кнопки <strong>EN</strong> на виртуальной клавиатуре';
+    document.body.append(adviсe);
+}
