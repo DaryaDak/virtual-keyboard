@@ -23,18 +23,18 @@ const Keyboard = {
 
     properties: {
         value: "",
-        capsLock: false,
+        CapsLock: false,
         lang: 'en'
     },
     keyLayouts: {
-    en: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+    en: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
     'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 
-    'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'done',
+    'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'done',
     'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '↑', '/', 'Ctrl', 'EN', 'Space', 'Ctrl', 'Alt', '←', '↓', '→'
 ],
-    ru: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+    ru: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
     'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',
-    'caps', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'done',
+    'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'done',
     'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '↑', '/', 'Ctrl', 'RU', 'Space', 'Ctrl', 'Alt', '←', '↓', '→'
 ]
     },
@@ -82,16 +82,16 @@ const Keyboard = {
         this.changeLang().forEach(key => {
             const keyElement = document.createElement("button");
             if (this.properties.lang === 'en') {
-                insertLineBreak = ['backspace', ']', 'enter', '/'].indexOf(key) !== -1;
+                insertLineBreak = ['Backspace', ']', 'enter', '/'].indexOf(key) !== -1;
             }
             if (this.properties.lang === 'ru') {
-                insertLineBreak = ['backspace', 'ъ', 'enter', '/'].indexOf(key) !== -1;
+                insertLineBreak = ['Backspace', 'ъ', 'enter', '/'].indexOf(key) !== -1;
             }
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("keyboard-key");
 
             switch (key) {
-                case "backspace":
+                case "Backspace":
                     keyElement.classList.add("keyboard-key-wide", "key_8");
                     keyElement.innerHTML = createIconHTML("backspace");
 
@@ -103,7 +103,7 @@ const Keyboard = {
                     break;
                     
 
-                case "caps":
+                case "CapsLock":
                     keyElement.classList.add("keyboard-key-wide", "keyboard-key-activatable", "key_20");
                     keyElement.innerHTML = createIconHTML("keyboard_capslock");
 
