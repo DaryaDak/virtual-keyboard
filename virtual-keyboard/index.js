@@ -19,53 +19,69 @@ const Keyboard = {
     properties: {
         value: "",
         capsLock: false,
+        lang: 'en'
+    },
+    keyLayouts: {
+    en: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+    'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',
+    'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'done',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '↑', '/', 'Ctrl', 'EN', 'Space', 'Ctrl', 'Alt', '←', '↓', '→'
+],
+    ru: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
+    'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\',
+    'caps', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'done',
+    'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '↑', '/', 'Ctrl', 'RU', 'Space', 'Ctrl', 'Alt', '←', '↓', '→'
+]
     },
 
 
+
+
     init() {
-        // Create main elements
+        
         this.elements.main = document.createElement("div");
         this.elements.keysContainer = document.createElement("div");
-
-        // Setup main elements
         this.elements.main.classList.add("keyboard");
         this.elements.keysContainer.classList.add("keyboard-keys");
         this.elements.keysContainer.appendChild(this.createKeys());
-
         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard-key");
-
-        // Add to DOM
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
 
-        // Automatically use keyboard for elements with textarea
         document.querySelectorAll(".area").forEach(element => {
+            element.addEventListener('focus', () => {
                 this.open(element.value, currentValue => {
                     element.value = currentValue;
                 });
         });
+    });
+    },
+
+    chooseLang() {
+        if (this.properties.lang === 'en') {
+            return this.keyLayouts.en
+        }
+        if (this.properties.lang === 'ru') {
+            return this.keyLayouts.ru
+        }
     },
 
 
     createKeys() {
         const fragment = document.createDocumentFragment();
-       const  keyLayout = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
-    'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',
-    'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'done',
-    'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '↑', '/', 'Ctrl', 'Alt', 'space', 'Ctrl', 'Alt', '←', '↓', '→']
-    // const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
-    // 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'del',
-    // 'caps', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'done',
-    // 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',  '↑', '/', 'Ctrl', 'Alt', 'space', 'Ctrl', 'Alt', '←', '↓', '→'],
         // Creates HTML for an icon
         const createIconHTML = (iconName) => {
             return `<i class="material-icons">${iconName}</i>`;
         };
 
-        keyLayout.forEach(key => {
+        this.chooseLang().forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "del", "enter", "/"].indexOf(key) !== -1;
-
+            if (this.properties.lang === 'en') {
+                insertLineBreak = ['backspace', ']', 'enter', '/'].indexOf(key) !== -1;
+            }
+            if (this.properties.lang === 'ru') {
+                insertLineBreak = ['backspace', 'ъ', 'enter', '/', ','].indexOf(key) !== -1;
+            }
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -104,9 +120,48 @@ const Keyboard = {
                         this.triggerEvent("oninput");
                     });
 
-                    break;
+                    break
 
-                case "space":
+                case 'EN':
+                    keyElement.classList.add('keyboard-key-wide');
+                    keyElement.textContent = key;
+                    keyElement.addEventListener('click', () => {
+                        if (this.properties.lang === 'en'){
+                            this.properties.lang = 'ru';
+    
+                        } else if (this.properties.lang === 'ru') {
+                            this.properties.lang = 'en';
+    
+                        }
+                        this.elements.main.classList.add('keyboard-hidden');
+                        this.init()                        
+
+
+                        });
+    
+                        break;
+    
+                case 'RU':
+                        keyElement.classList.add('keyboard-key-wide');
+    
+                        keyElement.textContent = key;
+                        keyElement.addEventListener('click', () => {
+                            if (this.properties.lang === 'en') {
+                                this.properties.lang = 'ru';
+    
+                            } else if (this.properties.lang === 'ru') {
+                                this.properties.lang = 'en';
+    
+                            }
+                            this.elements.main.classList.add('keyboard-hidden');
+                            this.init()
+                        });
+    
+                        break;
+    
+    
+
+                case "Space":
                     keyElement.classList.add("keyboard-key-extra");
                     keyElement.innerHTML = createIconHTML("space_bar");
 
@@ -207,6 +262,8 @@ const Keyboard = {
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
     }
+
+    
 };
 
 window.addEventListener("DOMContentLoaded", function () {

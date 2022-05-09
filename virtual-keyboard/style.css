@@ -84,3 +84,6 @@ body {
 .keyboard-key-active::after {
     background: #08ff00;
 }
+.keyboard-hidden {
+   display: none;
+}
