@@ -23,12 +23,12 @@ const Keyboard = {
     },
     keyLayouts: {
     en: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
-    'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\',
+    'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 
     'caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'enter', 'done',
     'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '↑', '/', 'Ctrl', 'EN', 'Space', 'Ctrl', 'Alt', '←', '↓', '→'
 ],
     ru: ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
-    'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\',
+    'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',
     'caps', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter', 'done',
     'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '↑', '/', 'Ctrl', 'RU', 'Space', 'Ctrl', 'Alt', '←', '↓', '→'
 ]
@@ -80,7 +80,7 @@ const Keyboard = {
                 insertLineBreak = ['backspace', ']', 'enter', '/'].indexOf(key) !== -1;
             }
             if (this.properties.lang === 'ru') {
-                insertLineBreak = ['backspace', 'ъ', 'enter', '/', ','].indexOf(key) !== -1;
+                insertLineBreak = ['backspace', 'ъ', 'enter', '/'].indexOf(key) !== -1;
             }
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("keyboard-key");

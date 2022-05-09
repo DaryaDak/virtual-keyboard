@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(212, 248, 248);
+    background-color: rgb(231, 226, 254);
 
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .keyboard-key:active {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(126, 2, 235, 0.295);
 }
 
 .keyboard-key-wide {
@@ -66,7 +66,7 @@ body {
 }
 
 .keyboard-key-extra {
-    width: 35%;
+    width: 32.5%;
     max-width: 550px;
 }
 
