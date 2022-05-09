@@ -57,7 +57,7 @@ const Keyboard = {
     });
     },
 
-    chooseLang() {
+    changeLang() {
         if (this.properties.lang === 'en') {
             return this.keyLayouts.en
         }
@@ -74,7 +74,7 @@ const Keyboard = {
             return `<i class="material-icons">${iconName}</i>`;
         };
 
-        this.chooseLang().forEach(key => {
+        this.changeLang().forEach(key => {
             const keyElement = document.createElement("button");
             if (this.properties.lang === 'en') {
                 insertLineBreak = ['backspace', ']', 'enter', '/'].indexOf(key) !== -1;
@@ -82,8 +82,6 @@ const Keyboard = {
             if (this.properties.lang === 'ru') {
                 insertLineBreak = ['backspace', 'ъ', 'enter', '/', ','].indexOf(key) !== -1;
             }
-
-            // Add attributes/classes
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("keyboard-key");
 
