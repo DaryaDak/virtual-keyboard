@@ -1,6 +1,11 @@
+const adviсe = document.createElement('p');
+    adviсe.classList.add('advice');
+    adviсe.innerHTML = '<strong>Сменить раскладку можно</strong> нажатием кнопки <strong>EN</strong> на виртуальной клавиатуре';
+    document.body.append(adviсe);
+    
 const textarea = document.createElement('textarea');
-textarea.classList.add('area');
-document.body.append(textarea);
+    textarea.classList.add('area');
+    document.body.append(textarea);
 
 
 
@@ -295,9 +300,3 @@ document.querySelector('.area').addEventListener('keypress', (event) => {
     const key = event.key;
     Keyboard.getKey(keyCode, key);
 })
-window.onload = () => {
-    const adviсe = document.createElement('p');
-    adviсe.classList.add('advice');
-    adviсe.innerHTML = '<strong>Сменить раскладку можно</strong> нажатием кнопки <strong>EN</strong> на виртуальной клавиатуре';
-    document.body.append(adviсe);
-}
